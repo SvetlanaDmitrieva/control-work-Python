@@ -14,7 +14,7 @@ def write_new_note(new_note:list):
     sort_exit()
 
 
-def get_note(index_note:str):
+def get_note(index_note:int):
     result = []
     o = open('file_note.csv', mode = 'r')
     file_data = csv.reader(o, delimiter = ",")

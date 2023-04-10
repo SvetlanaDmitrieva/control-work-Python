@@ -16,7 +16,7 @@ def main_menu() :
     choice = ''
     while True:
         try:
-            choice = int(input('Выберите пункт меню: '))
+            choice = int(input('Выберите пункт меню(от 1 по 7): '))
             if 0 < choice < 8:
                 return choice
         except ValueError:
@@ -70,10 +70,20 @@ def date_corr(d:str):
     
 
 def input_date():
-    d =  input ("Введите год (гггг):")[:4] 
-    d = d + "." + date_corr(input("Введите месяц (01, 02 ... 12):"))[:2]  
-    d = d + "." + date_corr(input("Введите число (01, 02 ... 31):"))[:2]
-    return d
+    while True:
+        year =  input ("Введите год (гггг):")[:4] 
+        month = date_corr(input("Введите месяц (01, 02 ... 12):"))[:2]  
+        day = date_corr(input("Введите число (01, 02 ... 31):"))[:2]
+        isValidDate = True
+        try:
+            date = datetime.datetime(int(year), int(month), int(day))
+        except ValueError:
+            isValidDate = False 
+        if (isValidDate): 
+            return (year + "." + month + "." + day)
+        else:
+            information("Введенная дата не существует.Повторите ввод")
+  
 
 def find_note():
     information('Введите дату искомой записи :\n')
@@ -103,7 +113,7 @@ def select_note(message:str):
 
 
 def change_note(note:list):
-    print('Введите новые данные (если изменения не требуютcя, нажмите Enter)')
+    print('Введите новые данные (если изменения не требуетcя, нажмите Enter)')
     date_note = ""
     y_n = input("Изменить дату заметки ? (y/n): ")
     if (y_n in "yYнН") :
